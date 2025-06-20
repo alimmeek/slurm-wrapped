@@ -1,9 +1,13 @@
+""" Summary usage statistics for SLURM-managed compute clusters """
+
 import subprocess
 
 DEFAULT_STATS = ["JobName", "Partition", "AllocCPUS", "State", "Elapsed"]
 
 
 def retrieve_stats() -> ():
+    """ Retrieves statistics from SLURM and stores in a dictionary """
+
     process = subprocess.Popen(
         f"sacct -u $(whoami) -n --start=1970-01-01 --format={','.join(DEFAULT_STATS)}",
         shell=True, stdout=subprocess.PIPE)
